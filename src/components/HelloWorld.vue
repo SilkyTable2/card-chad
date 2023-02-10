@@ -2,39 +2,26 @@
   <h1>{{ msg }}</h1>
 
 <!-- My custom code -->
-<button class="outsideBtn" v-on:click="duplicate">Duplicate</button>
-<button class="outsideBtn" v-on:click="background">Background</button>
-<button class="outsideBtn" v-on:click="heading">Heading</button>
-<button class="outsideBtn" v-on:click="deleter">Delete</button>
-
-<div class="card" v-on:mouseover="hoover">
-  <h1 class="title">Chad of Cyber IST</h1>
-
-  <img class="giaImg" src="https://media.discordapp.net/attachments/963095262363017246/1020131830323744788/unknown.png?width=468&height=468" alt="Professor Giacobe">
-  
-<div class="textbox">
-  <details>
-    <summary class="haxbtn">Details</summary>
-    <p class="description pScale">Professor Giacobe may look like a simple man but perceptions can be misleading. Underneath the facade of a simple college of IST professor lies the holiness of an <strong>IST GOD</strong>!</p>
-  </details>
-
-  </div>
+<div>
+  <button class="cardbtn"> Duplicate </button>
+  <button class="backgroundbtn cardbtn"> Dark Mode/Light Mode </button>
+  <button class="deletebtn cardbtn"> Delete Last Instance </button>
+  <button class="headingchangebtn cardbtn"> Change Heading </button>
 </div>
 
+<div id="card" class="size">
+  <div id="head" class="top">
+    <h1> Thursday Homework (Week 2) </h1>
+  </div>
+  <div class="image">
+    <img src="https://i.ytimg.com/vi/0gC7onSsEUU/hqdefault.jpg" alt="Bing Chilling">
+    <button class="haxbtn"> Details </button>
 
-  <p>
-    <a href="https://vitejs.dev/guide/features.html" target="_blank">
-      Vite Documentation
-    </a>
-    |
-    <a href="https://v3.vuejs.org/" target="_blank">Vue 3 Documentation</a>
-  </p>
-
-  <button type="button" @click="state.count++">count is: {{ state.count }}</button>
-  <p>
-    Edit
-    <code>components/HelloWorld.vue</code> to test hot module replacement.
-  </p>
+  </div>
+  <div id="descript" class="desc">
+    Image above depicts Actor and WWE Wrestler John Cena attempting to promote his upcoming movie, Fast and the Furious 9, in mandarin towards the chinese viewer market after previously making a controversial claim. The image comes from a video, famously known for its ridiculous scenario and for its famous line "bīng qí lín", or "Bing Chilling" as what it is commonly known as around the internet.
+  </div>
+</div>
 </template>
 
 <script setup>
@@ -51,60 +38,45 @@ const state = reactive({ count: 0 })
 
 export default {
   methods: {
-    hoover() {
-      document.querySelectorAll(".card").forEach((item) => {
-        if(!item.classList.contains("hoverCard")){
-          item.classList.add("hoverCard");
-          console.log(item);
-        }
-        else{
-          item.classList.remove("hoverCard");
-          console.log(item);
-        }
-      });
-    },
-    
-    duplicate() {
-      const cloneCard = document.querySelector(".card").cloneNode(true);
-      document.body.appendChild(cloneCard);
-      console.log(cloneCard);    
-    },
+    main(){
+      document.body.style.backgroundColor="white";
 
-    background() {
-      document.querySelectorAll(".card").forEach((item) => {
-        if(!item.classList.contains("basic")){
-          item.classList.add("basic");
-          console.log(item);
-        }
-        else{
-          item.classList.remove("basic");
-          console.log(item);
-        }
-      });
-    },
+  document.querySelector('.cardbtn').addEventListener("click", (e) => {
+    const card = document.getElementById("card");
+    const copy = card.cloneNode(true);
+    document.body.appendChild(copy);
+  })
 
-    heading() {
-      document.querySelectorAll(".title").forEach((item) => {   
-        if(item.innerHTML=="something else"){
-          item.innerHTML="Chad of Cyber IST";
-        }
-        else{
-          item.innerHTML="something else";
-        }
-      });
-    },
+  document.querySelector('.backgroundbtn').addEventListener("click", (e) => {
+    if (document.body.style.backgroundColor=="white"){
+      document.body.style.backgroundColor="black";
+    }
+    else if (document.body.style.backgroundColor="black") {
+      document.body.style.backgroundColor="white"
+    }
+  })
 
-    //Kinda borked rn
-    deleter(){
-      document.querySelector(".card:last-child").remove();
-      console.log(card);
+  document.querySelector('.deletebtn').addEventListener("click", (e) => {
+    const deleter = document.getElementById("card");
+    deleter.remove(deleter.lastElementChild);
+    })
+
+  document.querySelector('.haxbtn').addEventListener("click", (e) => {
+    var descRevealer = document.getElementById("descript");
+    if (descRevealer.style.visibility === "hidden") {
+      descRevealer.style.visibility = "visible";
+    }
+    else{
+      descRevealer.style.visibility = "hidden";
+    }
+    })
+
+  document.querySelector('.headingchangebtn').addEventListener("click", (e) => {
+    const headset = document.getElementById("head");
+    headset.innerHTML = "something else";
+    })
+
     }
   }
 }
 </script>
-
-<style scoped>
-a {
-  color: #42b983;
-}
-</style>
